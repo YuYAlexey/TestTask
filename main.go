@@ -1,13 +1,12 @@
 package main
 
 import (
-	"github.com/adYushinW/TestTask/internal/app"
-	"github.com/adYushinW/TestTask/internal/db"
-	"github.com/adYushinW/TestTask/internal/transport/gin"
+	"github.com/YuYAlexey/TestTask/internal/app"
+	"github.com/YuYAlexey/TestTask/internal/db"
+	"github.com/YuYAlexey/TestTask/internal/transport/http"
 )
 
 func main() {
-
 	db, err := db.New()
 	if err != nil {
 		panic(err)
@@ -15,7 +14,7 @@ func main() {
 
 	app := app.New(db)
 
-	if err := gin.Service(app); err != nil {
+	if err := http.Service(app); err != nil {
 		panic(err)
 	}
 }

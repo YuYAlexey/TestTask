@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/adYushinW/TestTask/internal/app"
-	"github.com/adYushinW/TestTask/internal/model"
+	"github.com/YuYAlexey/TestTask/internal/app"
+	"github.com/YuYAlexey/TestTask/internal/model"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,7 +17,6 @@ var count uint64
 var mu sync.Mutex
 
 func Service(app *app.App) error {
-
 	go func() {
 		t := time.NewTicker(time.Minute)
 		for range t.C {
@@ -39,12 +38,10 @@ func Service(app *app.App) error {
 
 			fmt.Println(count)
 			if count > 2 {
-
 				c.JSON(http.StatusTooManyRequests, "Too Many Requests")
 				c.Abort()
 				return
 			}
-
 		}()
 		c.Next()
 	})
@@ -114,7 +111,6 @@ func Service(app *app.App) error {
 	})
 
 	r.GET("/cats_stat", func(c *gin.Context) {
-
 		catsInfo, err := app.CatsInfo()
 		if err != nil {
 			c.JSON(http.StatusBadRequest, "Bad Request")
